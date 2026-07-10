@@ -128,6 +128,9 @@ if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; t
       xdg-desktop-portal xdg-desktop-portal-gtk \
       pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
       wayland-protocols wl-clipboard hunspell hunspell-en_us \
+      st \
+    sddm \
+    sddm-openrc
        --needed --noconfirm
 
     rc-update add sddm default 2>/dev/null || true
@@ -164,6 +167,8 @@ mkdir -p /etc/xdg/nvim/colors
 install -m 0644 ./config-files/sysinit.vim /etc/xdg/nvim/sysinit.vim
 install -m 0644 ./config-files/gruvbox.vim /etc/xdg/nvim/colors/gruvbox.vim
 rc-update add local
+rc-update add sddm
+rc-service xdm start
 
 # echo completion message
 echo -e "\n---------------------------------------------------------"
