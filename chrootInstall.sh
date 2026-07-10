@@ -136,7 +136,22 @@ if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; t
     # Core XFCE packages
     pacman -S xfce4 xfce4-goodies --needed --noconfirm 
     pacman -S xlibre --needed --noconfirm 
-   pacman -S xorg-xinit xclip xdg-desktop-portal xdg-desktop-portal-gtk pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber lightdm-openrc lightdm lightdm-gtk-greeter fastfetch htop neovim firefox thunar thunar-volman networkmanager-applet --needed --noconfirm
+    pacman -S xorg-xinit 
+    pacman -S xclip --needed --noconfirm
+    pacman -S xdg-desktop-portal --needed --noconfirm
+    pacman -S   xdg-desktop-portal-gtk --needed --noconfirm
+    pacman -S  pipewire pipewire-pulse --needed --noconfirm
+    pacman -S  pipewire-jack --needed --noconfirm
+    pacman -S pipewire-alsa --needed --noconfirm
+    pacman -S wireplumber --needed --noconfirm
+    pacman -S   lightdm-openrc --needed --noconfirm
+    pacman -S lightdm-gtk-greeter --needed --noconfirm
+    pacman -S   fastfetch --needed --noconfirm
+    pacman -S  htop --needed --noconfirm
+    pacman -S   neovim --needed --noconfirm
+    pacman -S firefox --needed --noconfirm
+    pacman -S thunar --needed --noconfirm
+    pacman -S thunar-volman  --needed --noconfirm
 
 
     # Set up display manager w
