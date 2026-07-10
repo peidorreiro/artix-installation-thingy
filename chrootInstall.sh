@@ -107,6 +107,18 @@ fi
 # disable kernel watchdog
 echo 'blacklist iTCO_wdt' > /etc/modprobe.d/blacklist.conf
 
+# pipewire
+install -m 0755 ./programs/pipewire-start/pipewire-start.sh /usr/local/bin/pipewire-start.sh
+install -Dm 0644 -o $username -g users ./programs/pipewire-start/pipewire.desktop /home/"$username"/.config/autostart/pipewire.desktop
+
+# ssh configuration
+pacman -S openssh --needed --noconfirm
+mkdir -p /home/"$username"/.ssh
+touch /home/"$username"/.ssh/authorized_keys
+chown -R "$username":users /home/"$username"/.ssh
+chmod 700 /home/"$username"/.ssh
+chmod 600 /home/"$username"/.ssh/authorized_keys
+
 # install laptop/desktop specific content (powertop on laptops; ntp local service startup script on desktops)
 if [ "$formfactor" == 2 ] || [ "$formfactor" == 1 ]; then
     pacman -S powertop --needed --noconfirm
@@ -136,6 +148,7 @@ if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; t
         firefox \
         thunar thunar-volman \
         tumbler \
+        networkmanager-applet
         --needed --noconfirm
 
     
