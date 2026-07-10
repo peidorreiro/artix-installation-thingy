@@ -118,20 +118,30 @@ chown "$username":users /home/"$username"/{.config,.local}
 chown "$username":users /home/"$username"/.local/share
 chmod 755 /home/"$username"/{.config,.local/share}
 
-## i3wm (XLIBRE) 
+## XFCE Desktop Environment
 if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; then
+    # Core XFCE packages
     pacman -S \
-      i3-wm i3status i3lock-color \
-      xorg-server xorg-xinit xterm xclip \
-      dmenu feh \
-      picom \
-      xdg-desktop-portal xdg-desktop-portal-gtk \
-      pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
-      st \
---needed --noconfirm
+        xfce4 \
+        xfce4-goodies \
+        xorg xorg-server xorg-xinit xterm xclip \
+        xdg-desktop-portal xdg-desktop-portal-gtk \
+        pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
+        lightdm lightdm-gtk-greeter \
+        fastfetch htop neovim \
+        firefox \
+        thunar thunar-volman \
+        tumbler \
+        --needed --noconfirm
 
-    rc-update add sddm default 2>/dev/null || true
-[
+    # Automatically install XFCE power manager for laptops (formfactor 1 or 2)
+    if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ]; then
+        pacman -S xfce4-power-manager --needed --noconfirm
+    fi
+
+    # Set up display manager with OpenRC (no autologin)
+    rc-update add lightdm default 2>/dev/null || true
+
     # directory ownership
     chown -R "$username":users /home/"$username"/.config
 fi
@@ -146,7 +156,6 @@ if [ "$formfactor" == 1 ]; then
     NVIDIA-FCKR integrated
 fi
 
-
 # misc configuration
 install -m 0755 ./programs/powerset/powerset.sh /usr/local/bin/powerset.sh
 install -m 0755 ./programs/zsh-histclean/histclean /usr/local/bin/histclean
@@ -159,13 +168,12 @@ fi
 echo -e ""$username"        soft    memlock        64\n"$username"        hard    memlock        2097152\n"$username"        hard    nofile        524288\n# End of file" > /etc/security/limits.conf  # increase memlock and add support for esync
 echo 'vm.max_map_count=2147483642' > /etc/sysctl.d/90-override.conf  # increase max virtual memory maps (helps with some Wine games)
 echo 'ntsync' > /etc/modules-load.d/ntsync.conf
-pacman -S fastfetch htop neovim --needed --noconfirm
 mkdir -p /etc/xdg/nvim/colors
 install -m 0644 ./config-files/sysinit.vim /etc/xdg/nvim/sysinit.vim
 install -m 0644 ./config-files/gruvbox.vim /etc/xdg/nvim/colors/gruvbox.vim
 rc-update add local
-rc-update add sddm
-rc-service xdm start
+rc-update add lightdm
+rc-service lightdm start
 
 # echo completion message
 echo -e "\n---------------------------------------------------------"
