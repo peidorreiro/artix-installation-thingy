@@ -59,7 +59,6 @@ $userpassword
 
 # opendoas configuration
 echo "permit persist keepenv :wheel as root
-permit nopass :wheel as root cmd /usr/local/bin/powerset.sh
 permit nopass :wheel as root cmd /usr/bin/poweroff
 permit nopass :wheel as root cmd /usr/bin/reboot
 " > /etc/doas.conf
@@ -119,49 +118,23 @@ chown "$username":users /home/"$username"/{.config,.local}
 chown "$username":users /home/"$username"/.local/share
 chmod 755 /home/"$username"/{.config,.local/share}
 
-## KDE Plasma
+## i3wm (X11) + SDDM
 if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; then
-    pacman -S qt6-wayland plasma-desktop xdg-desktop-portal-kde kscreen spectacle gwenview ark kate dolphin konsole kwallet-pam kwalletmanager plasma-nm plasma-pa breeze-gtk kde-gtk-config bluedevil qt6-imageformats qt6-multimedia-ffmpeg pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber wayland-protocols wl-clipboard hunspell hunspell-en_us bluez-openrc --needed --noconfirm
+    pacman -S \
+      i3-wm i3status i3lock-color \
+      xorg-server xorg-xinit xterm xclip \
+      dmenu feh \
+      picom \
+      xdg-desktop-portal xdg-desktop-portal-gtk \
+      pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
+      wayland-protocols wl-clipboard hunspell hunspell-en_us \
+      sddm sddm-openrc --needed --noconfirm
 
-    # misc. config
-    install -m 0600 -o $username -g users ./config-files/plasma/kdeglobals-gruvboxDark.colors /home/"$username"/.config/kdeglobals
-    install -Dm 0600 -o $username -g users ./config-files/plasma/kdeglobals-gruvboxDark.colors /home/"$username"/.local/share/color-schemes/gruvboxDark.colors
-    install -Dm 0600 -o $username -g users ./config-files/plasma/konsole-profile /home/"$username"/.local/share/konsole/Custom.profile
-    install -m 0600 -o $username -g users ./config-files/plasma/gruvboxDarkKonsole.colorscheme /home/"$username"/.local/share/konsole/gruvboxDark.colorscheme
-    install -m 0600 -o $username -g users ./config-files/plasma/konsolerc /home/"$username"/.config/konsolerc
-    install -m 0600 -o $username -g users ./config-files/plasma/katerc /home/"$username"/.config/katerc
-    install -Dm 0600 -o $username -g users ./config-files/plasma/Sonnet.conf /home/"$username"/.config/KDE/Sonnet.conf
-    install -m 0600 -o $username -g users ./config-files/plasma/kactivitymanagerdrc /home/"$username"/.config/kactivitymanagerdrc
-    install -m 0600 -o $username -g users ./config-files/plasma/breezerc /home/"$username"/.config/breezerc
-    install -m 0600 -o $username -g users ./config-files/plasma/kglobalshortcutsrc /home/"$username"/.config/kglobalshortcutsrc
-    install -m 0600 -o $username -g users ./config-files/plasma/powerdevilrc /home/"$username"/.config/powerdevilrc
-    install -m 0600 -o $username -g users ./config-files/plasma/kded5rc /home/"$username"/.config/kded5rc
-    install -m 0600 -o $username -g users ./config-files/plasma/kwinrc /home/"$username"/.config/kwinrc
-    install -m 0600 -o $username -g users ./config-files/plasma/plasma-org.kde.plasma.desktop-appletsrc /home/"$username"/.config/plasma-org.kde.plasma.desktop-appletsrc
-    echo -e "[Dolphin]\nVersion=4\nVisibleRoles=Icons_text,Icons_size,Icons_modificationtime" | install -Dm 0600 -o $username -g users /dev/stdin /home/"$username"/.local/share/dolphin/view_properties/global/.directory
-    echo -e "[General]\nActivateWhenTypingOnDesktop=false\nFreeFloating=true\n\n[Plugins]\nbaloosearchEnabled=false\nhelprunnerEnabled=false\nkrunner_appstreamEnabled=false\nkrunner_bookmarksrunnerEnabled=false\nkrunner_charrunnerEnabled=false\nkrunner_katesessionsEnabled=false\nkrunner_killEnabled=false\nkrunner_konsoleprofilesEnabled=false\nkrunner_kwinEnabled=false\nkrunner_placesrunnerEnabled=false\nkrunner_plasma-desktopEnabled=false\nkrunner_powerdevilEnabled=false\nkrunner_recentdocumentsEnabled=false\nkrunner_sessionsEnabled=false\nkrunner_webshortcutsEnabled=false\nlocationsEnabled=false\norg.kde.activities2Enabled=false\nwindowsEnabled=false" | install -m 0600 -o $username -g users /dev/stdin /home/"$username"/.config/krunnerrc
-    echo -e "[Basic Settings]\nIndexing-Enabled=false" | install -m 0600 -o $username -g users /dev/stdin /home/"$username"/.config/baloofilerc
-    echo -e "[General]\nloginMode=emptySession" | install -m 0600 -o $username -g users /dev/stdin /home/"$username"/.config/ksmserverrc
-
-    # allow auto-unlocking kwallet via PAM
-    install -m 0644 ./config-files/plasma/pam-login-kwallet /etc/pam.d/login
-
-    # pipewire
-    install -m 0755 ./programs/pipewire-start/pipewire-start.sh /usr/local/bin/pipewire-start.sh
-    install -Dm 0644 -o $username -g users ./programs/pipewire-start/pipewire.desktop /home/"$username"/.config/autostart/pipewire.desktop
-
-    # konquake
-    install -m 0755 ./programs/konquake/konquake.sh /usr/local/bin/konquake
-    install -Dm 0644 -o $username -g users ./programs/konquake/konquake.desktop /home/"$username"/.local/share/applications/konquake.desktop
-    echo -e "[1]\nDescription=konquake\nabove=true\naboverule=2\nnoborder=true\nnoborderrule=2\nplacement=6\nplacementrule=2\nsize=$res_x,$res_y_half\nsizerule=3\ntitle=konquake session\ntitlematch=2\ntypes=1\nwmclass=konsole org.kde.konsole\nwmclasscomplete=true\nwmclassmatch=1\n\n[2]\nDescription=konsole\nsize=1280,800\nsizerule=3\ntypes=1\nwmclass=konsole org.kde.konsole\nwmclasscomplete=true\nwmclassmatch=1\n\n[General]\ncount=2\nrules=1,2" | install -m 0600 -o $username -g users /dev/stdin /home/"$username"/.config/kwinrulesrc
-
+    rc-update add sddm default 2>/dev/null || true
+[
     # directory ownership
-    chown -R $username:users /home/"$username"/.local/share/color-schemes /home/"$username"/.local/share/konsole /home/"$username"/.config/KDE /home/"$username"/.local/share/dolphin /home/"$username"/.config/autostart /home/"$username"/.local/share/applications
-
-    # shell profile
-    echo -e '\n[ -z $DISPLAY ] && [ $(tty) = /dev/tty1 ] && exec dbus-run-session startplasma-wayland' >> /home/"$username"/.profile
+    chown -R "$username":users /home/"$username"/.config
 fi
-
 
 # asus g14 2020 configuration
 if [ "$formfactor" == 1 ]; then
@@ -173,13 +146,6 @@ if [ "$formfactor" == 1 ]; then
     NVIDIA-FCKR integrated
 fi
 
-# ssh configuration
-pacman -S openssh --needed --noconfirm
-mkdir -p /home/"$username"/.ssh
-touch /home/"$username"/.ssh/authorized_keys
-chown -R "$username":users /home/"$username"/.ssh
-chmod 700 /home/"$username"/.ssh
-chmod 600 /home/"$username"/.ssh/authorized_keys
 
 # misc configuration
 install -m 0755 ./programs/powerset/powerset.sh /usr/local/bin/powerset.sh
@@ -205,3 +171,4 @@ echo Installation completed!
 echo Please poweroff and remove the installation media before powering back on.
 echo -e "---------------------------------------------------------\n"
 exit
+

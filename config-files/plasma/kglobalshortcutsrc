@@ -1,8 +1,0 @@
-[ksmserver]
-Lock Session=Meta+Esc\tScreensaver,Meta+L\tScreensaver,Lock Session
-
-[services][org.kde.krunner.desktop]
-_launch=Meta
-
-[services][konquake.desktop]
-_launch=F12
