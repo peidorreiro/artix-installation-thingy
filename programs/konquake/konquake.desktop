@@ -1,7 +1,0 @@
-[Desktop Entry]
-Exec=/usr/local/bin/konquake
-Name=/usr/local/bin/konquake
-NoDisplay=true
-StartupNotify=false
-Type=Application
-X-KDE-GlobalAccel-CommandShortcut=true
