@@ -23,7 +23,7 @@ After running the script, it will ask some questions about your desired configur
 
 # Supported Devices
 Generic:
-- Most x86_64 desktops and laptops
+- Most x86_64 desktops and laptops, very experimental though at least for now.
 
 Special:
 - ASUS Zephyrus G14 (2020)
