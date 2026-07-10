@@ -143,12 +143,12 @@ if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; t
         xlibre xorg-server xorg-xinit xterm xclip \
         xdg-desktop-portal xdg-desktop-portal-gtk \
         pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
-        lightdm lightdm-openrc lightdm-gtk-greeter \
+        lightdm-openrc lightdm-gtk-greeter \
         fastfetch htop neovim \
         firefox \
         thunar thunar-volman \
         tumbler \
-        networkmanager-applet
+        networkmanager-applet \
         --needed --noconfirm
 
     
