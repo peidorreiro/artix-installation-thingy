@@ -8,7 +8,7 @@ Some major/noteworthy differences from common configurations:
 - makepkg is configured for better than stock performance and uses more space-efficient compression
 - dash is used as the system and login shell
 - zsh (with a custom zshrc) is used as the default shell
-- stock i3wm configuration for 0 bloat
+- stock xfce installation with 0 effort
 # Usage
 Upon loading up the official Artix OpenRC base ISO (tested on weekly base images only), logging in as root, and connecting to the internet, run:
 

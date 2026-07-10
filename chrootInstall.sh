@@ -76,11 +76,15 @@ if [ "$gpu" == 'NVIDIA' ]; then
     install -m 0644 ./config-files/nvidia-lts.hook /etc/pacman.d/hooks/nvidia-lts.hook
 fi
 
-# shell configuration
+# shell configuration - Make zsh default for user and dash for system
 pacman -Sy zsh zsh-autosuggestions zsh-syntax-highlighting --noconfirm
 install -m 0644 -o $username -g users ./config-files/shell-profile /home/"$username"/.profile
 install -m 0644 -o $username -g users ./config-files/zshrc /home/"$username"/.zshrc
-chsh -s /bin/dash "$username"
+
+# Set zsh as default shell for the user
+chsh -s /bin/zsh "$username"
+
+# Set dash as the default system shell (/bin/sh)
 ln -sfT dash /usr/bin/sh
 
 # installing hardware-specific packages
@@ -124,18 +128,18 @@ if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; t
     pacman -S \
         xfce4 \
         xfce4-goodies \
-        xorg xorg-server xorg-xinit xterm xclip \
+        xlibre xorg-server xorg-xinit xterm xclip \
         xdg-desktop-portal xdg-desktop-portal-gtk \
         pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
-        lightdm lightdm-gtk-greeter \
+        lightdm lightdm-openrc lightdm-gtk-greeter \
         fastfetch htop neovim \
         firefox \
         thunar thunar-volman \
         tumbler \
         --needed --noconfirm
 
-
-    # Set up display manager with OpenRC
+    
+    # Set up display manager with OpenRC (no autologin)
     rc-update add lightdm default 2>/dev/null || true
 
     # directory ownership
