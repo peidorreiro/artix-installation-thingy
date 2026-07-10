@@ -120,15 +120,15 @@ chmod 755 /home/"$username"/{.config,.local/share}
 
 ## i3wm (XLIBRE) 
 if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; then
-    pacman -S 
-      i3-wm i3status i3lock-color 
-      xorg-server xorg-xinit xterm xclip 
-      dmenu feh 
-      picom 
-      xdg-desktop-portal xdg-desktop-portal-gtk 
-      pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber 
-      wayland-protocols wl-clipboard hunspell hunspell-en_us 
-      st 
+    pacman -S \
+      i3-wm i3status i3lock-color \
+      xorg-server xorg-xinit xterm xclip \
+      dmenu feh \
+      picom \
+      xdg-desktop-portal xdg-desktop-portal-gtk \
+      pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
+      wayland-protocols wl-clipboard hunspell hunspell-en_us \
+      st \
        --needed --noconfirm
 
     rc-update add sddm default 2>/dev/null || true
