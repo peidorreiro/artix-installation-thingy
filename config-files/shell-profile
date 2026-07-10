@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# WAYLAND ENV
-export WAYLAND_PROTOCOLS_DATADIR="/usr/share/wayland-protocols"
-export ELECTRON_OZONE_PLATFORM_HINT=auto
 
 # XDG BASE ENV
 export XDG_DATA_HOME="$HOME"/.local/share
