@@ -118,7 +118,7 @@ chown "$username":users /home/"$username"/{.config,.local}
 chown "$username":users /home/"$username"/.local/share
 chmod 755 /home/"$username"/{.config,.local/share}
 
-## i3wm (X11) + SDDM
+## i3wm (XLIBRE) 
 if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; then
     pacman -S \
       i3-wm i3status i3lock-color \
@@ -128,14 +128,14 @@ if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; t
       xdg-desktop-portal xdg-desktop-portal-gtk \
       pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
       wayland-protocols wl-clipboard hunspell hunspell-en_us \
-      sddm sddm-openrc --needed --noconfirm
+       --needed --noconfirm
 
     rc-update add sddm default 2>/dev/null || true
 [
     # directory ownership
     chown -R "$username":users /home/"$username"/.config
 fi
-
+    
 # asus g14 2020 configuration
 if [ "$formfactor" == 1 ]; then
     echo 'options snd_hda_intel power_save=1' > /etc/modprobe.d/audio_powersave.conf
