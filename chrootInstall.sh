@@ -134,7 +134,7 @@ chmod 755 /home/"$username"/{.config,.local/share}
 ## XFCE Desktop Environment
 if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; then
     # Core XFCE packages
-    sudo pacman -S $(pacman -Sgq xfce4 xfce4-goodies xlibre) xorg-xinit xclip xdg-desktop-portal xdg-desktop-portal-gtk pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber lightdm-openrc lightdm lightdm-gtk-greeter fastfetch htop neovim firefox thunar thunar-volman networkmanager-applet
+    sudo pacman -S xfce4 xfce4-goodies xlibre xorg-xinit xclip xdg-desktop-portal xdg-desktop-portal-gtk pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber lightdm-openrc lightdm lightdm-gtk-greeter fastfetch htop neovim firefox thunar thunar-volman networkmanager-applet
  --needed --noconfirm
 
 
@@ -170,7 +170,6 @@ mkdir -p /etc/xdg/nvim/colors
 install -m 0644 ./config-files/sysinit.vim /etc/xdg/nvim/sysinit.vim
 install -m 0644 ./config-files/gruvbox.vim /etc/xdg/nvim/colors/gruvbox.vim
 rc-update add local
-rc-update add lightdm
 rc-service lightdm start
 
 # echo completion message
