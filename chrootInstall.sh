@@ -134,12 +134,8 @@ if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; t
         tumbler \
         --needed --noconfirm
 
-    # Automatically install XFCE power manager for laptops (formfactor 1 or 2)
-    if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ]; then
-        pacman -S xfce4-power-manager --needed --noconfirm
-    fi
 
-    # Set up display manager with OpenRC (no autologin)
+    # Set up display manager with OpenRC
     rc-update add lightdm default 2>/dev/null || true
 
     # directory ownership
