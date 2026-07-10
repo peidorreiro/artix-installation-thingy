@@ -239,5 +239,5 @@ echo 'kernel.sysrq = 244' > /mnt/etc/sysctl.d/35-sysrq.conf
 var_export=($formfactor $threadsminusone $gpu $boot $disk0 $username $userpassword $timezone $swap $intel_vaapi_driver $res_x $res_y_half)
 
 # initiate part 2
-mount --bind /root/artix-install-script /mnt/mnt
+mount --bind /root/artix-installation-thingy /mnt/mnt
 artix-chroot /mnt /mnt/chrootInstall.sh "${var_export[@]}"
