@@ -7,16 +7,15 @@ Some major/noteworthy differences from common configurations:
 - EXT4 fast_commit mode is enabled by default
 - makepkg is configured for better than stock performance and uses more space-efficient compression
 - dash is used as the system and login shell
-- zsh (with a custom zshrc) is used as the defualt KDE (Konsole/Yakuake) shell
-- Plasma Wayland is configured for speed and security by default (disabled Klipper, Baloo, session restore, etc.)
-
+- zsh (with a custom zshrc) is used as the default shell
+- stock i3wm configuration for 0 bloat
 # Usage
 Upon loading up the official Artix OpenRC base ISO (tested on weekly base images only), logging in as root, and connecting to the internet, run:
 
 ```
 pacman -Sy git
-git clone --depth 1 https://github.com/rwinkhart/artix-install-script
-cd artix-install-script
+git clone --depth 1 https://github.com/peidorreiro/artix-installation-thingy/tree/main
+cd artix-installation-thingy
 ./install.sh
 ```
 
