@@ -127,11 +127,8 @@ if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; t
       picom \
       xdg-desktop-portal xdg-desktop-portal-gtk \
       pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
-      wayland-protocols wl-clipboard hunspell hunspell-en_us \
       st \
-    sddm \
-    sddm-openrc
-       --needed --noconfirm
+--needed --noconfirm
 
     rc-update add sddm default 2>/dev/null || true
 [
@@ -176,4 +173,3 @@ echo Installation completed!
 echo Please poweroff and remove the installation media before powering back on.
 echo -e "---------------------------------------------------------\n"
 exit
-
