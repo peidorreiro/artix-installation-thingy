@@ -81,7 +81,7 @@ pacman -Sy zsh zsh-autosuggestions zsh-syntax-highlighting --noconfirm
 install -m 0644 -o $username -g users ./config-files/shell-profile /home/"$username"/.profile
 install -m 0644 -o $username -g users ./config-files/zshrc /home/"$username"/.zshrc
 
-chsh -s /bin/dash "$username"
+chsh -s /bin/zsh "$username"
 ln -sfT dash /usr/bin/sh
 
 # installing hardware-specific packages
@@ -152,7 +152,7 @@ if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; t
     pacman -S firefox --needed --noconfirm
     pacman -S thunar --needed --noconfirm
     pacman -S thunar-volman  --needed --noconfirm
-
+    pacman -S network-manager-applet --needed --noconfirm
 
     # Set up display manager w
     rc-update add lightdm 
