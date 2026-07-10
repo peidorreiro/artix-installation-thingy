@@ -134,18 +134,8 @@ chmod 755 /home/"$username"/{.config,.local/share}
 ## XFCE Desktop Environment
 if [ "$formfactor" == 1 ] || [ "$formfactor" == 2 ] || [ "$formfactor" == 3 ]; then
     # Core XFCE packages
-    pacman -S \
-        xfce4 \
-        xfce4-goodies \
-        xlibre xorg-xinit xterm xclip \
-        xdg-desktop-portal xdg-desktop-portal-gtk \
-        pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber \
-        lightdm-openrc lightdm lightdm-gtk-greeter \
-        fastfetch htop neovim \
-        firefox \
-        thunar thunar-volman \
-        networkmanager-applet \
-        --needed --noconfirm
+    sudo pacman -S $(pacman -Sgq xfce4 xfce4-goodies xlibre xorg-xinit xterm xclip xdg-desktop-portal xdg-desktop-portal-gtk pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber lightdm-openrc lightdm lightdm-gtk-greeter fastfetch htop neovim firefox thunar thunar-volman networkmanager-applet)
+ --needed --noconfirm
 
 
     # Set up display manager w
