@@ -36,4 +36,4 @@ export PROTON_ENABLE_WAYLAND=1
 export EDITOR=nvim
 export BUILDDIR=/tmp/makepkg
 
-[ -z $DISPLAY ] && [ $(tty) = /dev/tty1 ] && exec dbus-run-session startplasma-wayland
+[ -z $DISPLAY ] && [ $(tty) = /dev/tty1 ] && exec dbus-run-session i3
