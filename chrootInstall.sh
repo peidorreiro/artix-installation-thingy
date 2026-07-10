@@ -169,7 +169,6 @@ mkdir -p /etc/xdg/nvim/colors
 install -m 0644 ./config-files/sysinit.vim /etc/xdg/nvim/sysinit.vim
 install -m 0644 ./config-files/gruvbox.vim /etc/xdg/nvim/colors/gruvbox.vim
 rc-update add local
-rc-service lightdm start
 
 # echo completion message
 echo -e "\n---------------------------------------------------------"
